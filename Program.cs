@@ -8,43 +8,46 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
+            int yearOfBirth, monthOfBirth, dayOfBirth;
+            
             DateTime Now = DateTime.Now;
+            int ThisYear = Now.Year;            
 
             Console.WriteLine("Введите Ваше имя.");
-            string name = Console.ReadLine();
-            
-            int ThisYear = Now.Year;
+            string name = Console.ReadLine();           
             
             Console.WriteLine("Теперь введите год Вашего рождения. Но только из нашей эры.");
-            int byear = Convert.ToInt32(Console.ReadLine());
             
-            while (byear < 1 || byear >= ThisYear)
+            string enteredYear = Console.ReadLine();
+            
+            while (!int.TryParse(enteredYear, out yearOfBirth) || yearOfBirth >= ThisYear)
             {
                 Console.WriteLine("С такими числами мне не приходилось работать. Попробуйте снова");
-                byear = Convert.ToInt32(Console.ReadLine());
+                enteredYear = Console.ReadLine();
             }
             
             Console.WriteLine("Теперь введите номер месяца от 1 до 12.");
-            int bmonth = Convert.ToInt32(Console.ReadLine());
+            string enteredMonth = (Console.ReadLine());
             
-            while (bmonth < 1 || bmonth > 12)
+            while (!int.TryParse(enteredMonth, out monthOfBirth) || monthOfBirth > 12)
             {
                 Console.WriteLine("Пожалуйста, введите корректный номер месяца [1;12]");
-                bmonth = Convert.ToInt32(Console.ReadLine());
+                enteredMonth = (Console.ReadLine());
             }
             
-            int LD = DateTime.DaysInMonth(byear, bmonth);
+            int lastMonthDay = DateTime.DaysInMonth(yearOfBirth, monthOfBirth);
             
             Console.WriteLine("Теперь введите номер дня, в который Вы родились");
-            int bday = Convert.ToInt32(Console.ReadLine());
+            string enteredDay = Console.ReadLine();
             
-            while (bday < 1 || bday > LD)
+            while (!int.TryParse(enteredDay, out dayOfBirth) || dayOfBirth > lastMonthDay)
             {
                 Console.WriteLine("В уцказанном месяце нет дня с таким номером. Попробуйте снова.");
-                bday = Convert.ToInt32(Console.ReadLine());
+                enteredDay = Console.ReadLine();
             }
             
-            DateTime Birhday = new DateTime(byear, bmonth, bday);
+            DateTime Birhday = new DateTime(yearOfBirth, monthOfBirth, dayOfBirth);
+
             int Age = ThisYear - Birhday.Year;
             
             if ( Now.Month <= Birhday.Month)
